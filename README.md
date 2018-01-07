@@ -10,15 +10,24 @@ Create your project in Facebook's developer site (https://developers.facebook.co
 
 Configure your plist (replace you **FacebookAppID** && **URL types** )
 
-Then install pods
+Then install pods from terminal
 
+  ```
     $ sudo gem install cocoapods
     $ pod init
+  ```
+  
+ In your podfile
+ ```
     $ pod 'FBSDKLoginKit'
     $ pod 'FacebookCore'
     $ pod 'FacebookLogin'
     $ pod 'FacebookShare'
+  ``` 
+  In terminal
+  ```
     $ pod install
+  ```
     
  You can run the .xcworkspace project now.
  You will get your data in `fbParser` object in `getFBUserData()`
