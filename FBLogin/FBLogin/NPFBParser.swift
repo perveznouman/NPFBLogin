@@ -7,6 +7,14 @@
 //
 
 import UIKit
+import FacebookLogin
+import FacebookCore
+import FBSDKLoginKit
+
+protocol FBParserDelegate: class {
+    
+    func parsingCompleted(_ obj: NPFBParser) -> Void
+}
 
 class NPFBParser: NSObject {
     
@@ -16,11 +24,52 @@ class NPFBParser: NSObject {
    public var FName : String!
    public var fbID : String!
    public var otherDetails : NSDictionary!
-    
-    
-    init (_ responseObj: NSDictionary){
+   public weak var delegate : FBParserDelegate?
+
+
+    // MARK: Init
+    override init() {
         
         super.init()
+        self.getPermissionFromFB()
+        return
+    }
+    
+    // MARK: User Defined Method
+
+    func getPermissionFromFB() -> Void {
+        
+        let fbLoginManager : FBSDKLoginManager = FBSDKLoginManager()
+        fbLoginManager.logIn(withReadPermissions: ["email"], from: NPFBLoginViewController() ) { (result, error) -> Void in
+            if (error == nil){
+                let fbloginresult : FBSDKLoginManagerLoginResult = result!
+                // if user cancel the login
+                if (result?.isCancelled)!{
+                    return
+                }
+                if(fbloginresult.grantedPermissions.contains("email")){
+                    self.getFBUserData()
+                }
+            }
+        }
+    }
+    
+    func getFBUserData(){
+        if((FBSDKAccessToken.current()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start(completionHandler: { (connection, result, error) -> Void in
+                if (error == nil){
+                    guard let resultDict = result else{
+                        return
+                    }
+                    let responseDict = resultDict as? NSDictionary
+                    self.parseFBData(responseDict!)
+                }
+            })
+        }
+    }
+    
+    func parseFBData(_ responseObj: NSDictionary) -> Void {
+        
         if let email = responseObj["email"]{
             self.emailID = email as! String
         }
@@ -57,6 +106,7 @@ class NPFBParser: NSObject {
         else{
             self.otherDetails = [:]
         }
-        return
+        //calls delegate and sends backs to Viewcontroller
+        self.delegate?.parsingCompleted(self)
     }
 }

@@ -2,8 +2,8 @@
 //  FBLoginTests.swift
 //  FBLoginTests
 //
-//  Created by Ratheesh Mac Mini on 03/01/18.
-//  Copyright © 2018 Ratheesh Mac Mini. All rights reserved.
+//  Created by NOUMAN PERVEZ on 03/01/18.
+//  Copyright © 2018 NOUMAN PERVEZ. All rights reserved.
 //
 
 import XCTest
