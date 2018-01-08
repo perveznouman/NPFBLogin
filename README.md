@@ -30,9 +30,11 @@ Then install pods from terminal
   ```
     
  You can run the .xcworkspace project now.
- You will get your data in `fbParser` object in `getFBUserData()`
+ You will get your data in `parseObj` object in `parsingCompleted(_ parseObj: NPFBParser)`delegate method.
  
  # Finally
+ You can set set up pods and drag and drop `NPFBParser` class in your project and confirm to the `NPFBParserDelegate` protocol.You will get your response data in your `ViewController`.
+ 
  Thank you for referring. You can always suggest me if we can we do the things in a better way (perveznouman@gmail.com).
 
 # Authors
