@@ -11,7 +11,7 @@ import FacebookLogin
 import FacebookCore
 import FBSDKLoginKit
 
-protocol FBParserDelegate: class {
+protocol NPFBParserDelegate: class {
     
     func parsingCompleted(_ obj: NPFBParser) -> Void
 }
@@ -24,7 +24,7 @@ class NPFBParser: NSObject {
    public var FName : String!
    public var fbID : String!
    public var otherDetails : NSDictionary!
-   public weak var delegate : FBParserDelegate?
+   public weak var delegate : NPFBParserDelegate?
 
 
     // MARK: Init

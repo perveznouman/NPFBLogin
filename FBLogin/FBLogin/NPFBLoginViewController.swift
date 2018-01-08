@@ -11,7 +11,7 @@ import FacebookLogin
 import FacebookCore
 import FBSDKLoginKit
 
-class NPFBLoginViewController: UIViewController, FBParserDelegate {
+class NPFBLoginViewController: UIViewController, NPFBParserDelegate {
 
  // MARK: UIViewController Lifecycle
     override func viewDidLoad() {
@@ -32,9 +32,9 @@ class NPFBLoginViewController: UIViewController, FBParserDelegate {
     }
     
     // MARK: NPFBParser Delegate
-    func parsingCompleted(_ obj: NPFBParser) {
+    func parsingCompleted(_ parseObj: NPFBParser) {
         
-        print(obj)
+        print(parseObj)
     }
     
 }
