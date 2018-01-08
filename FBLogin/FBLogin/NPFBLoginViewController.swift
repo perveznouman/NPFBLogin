@@ -28,7 +28,6 @@ class NPFBLoginViewController: UIViewController, FBParserDelegate {
     @IBAction func Action_FBLogin(_ sender: UIButton) {
         
         let fbParse = NPFBParser()
-        print(fbParse)
         fbParse.delegate = self
     }
     
